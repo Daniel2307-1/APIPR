@@ -1,8 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import usuarioRoutes from './Routes/usuarios.routes.js'
-
-
+import lenguajesRoutes from './Routes/lenguajes.routes.js'
 const app = express()
 
 const corsOptions = {
@@ -15,6 +14,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 
 app.use('/api', usuarioRoutes)
+app.use('/api', lenguajesRoutes)
 
 
 app.use((req, res, next) => {
