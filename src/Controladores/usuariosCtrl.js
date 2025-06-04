@@ -54,3 +54,43 @@ export const obetenerdatosA = async (req, res) => {
     });
   }
 };
+export const postUsuarios = async (req, res) => {
+  try {
+    const {
+      alias,
+      nombre,
+      apellido,
+      correo,
+      contrasena,
+      fecha_registro,
+      estado,
+      foto
+    } = req.body;
+
+    if (!alias || !nombre || !apellido || !correo || !contrasena || estado === undefined) {
+      return res.status(400).json({ message: "Faltan campos obligatorios" });
+    }
+
+    const [result] = await sql.query(
+      `INSERT INTO usuarios 
+      (alias, nombre, apellido, correo, contrasena, fecha_registro, estado, foto)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [alias, nombre, apellido, correo, contrasena, fecha_registro, estado, foto]
+    );
+
+    res.status(201).json({
+      id: result.insertId,
+      message: "Usuario registrado con éxito"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
