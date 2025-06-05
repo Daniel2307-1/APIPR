@@ -7,7 +7,7 @@ export const obetenerdatosporusuario = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const [result] = await sql.query('SELECT * FROM Favoritos WHERE id = ?', [id]);
+    const [result] = await sql.query('SELECT * FROM Favoritos WHERE id_usuario = ?', [id]);
 
     if (result.length <= 0) {
       return res.status(404).json({
