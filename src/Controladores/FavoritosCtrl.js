@@ -55,4 +55,35 @@ export const postFavoritos = async (req, res) => {
     });
   }
 };
+export const deleteFavorito = async (req, res) => {
+  try {
+    const { id_usuario, id_lenguaje } = req.params;
+
+    const [result] = await sql.query(
+      'DELETE FROM Favoritos WHERE id_usuario = ? AND id_lenguaje = ?',
+      [id_usuario, id_lenguaje]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: "Favorito no encontrado"
+      });
+    }
+
+    res.json({
+      message: "Favorito eliminado correctamente"
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
+
 
