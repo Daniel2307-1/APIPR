@@ -7,7 +7,7 @@ export const obetenerdatosporusuario = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const [result] = await sql.query('SELECT *FROM Favoritos WHERE id_usuario = ?', [id]);
+    const [result] = await sql.query('SELECT *FROM favoritos WHERE id_usuario = ?', [id]);
 
     if (result.length <= 0) {
       return res.status(404).json({
@@ -31,7 +31,7 @@ export const postFavoritos = async (req, res) => {
     }
 
     const [result] = await sql.query(
-      `INSERT INTO Favoritos (id_usuario, id_lenguaje) VALUES (?, ?)`,
+      `INSERT INTO favoritos (id_usuario, id_lenguaje) VALUES (?, ?)`,
       [id_usuario, id_lenguaje]
     );
 
@@ -56,7 +56,7 @@ export const deleteFavorito = async (req, res) => {
     const { id_usuario, id_lenguaje } = req.params;
 
     const [result] = await sql.query(
-      'DELETE FROM Favoritos WHERE id_usuario = ? AND id_lenguaje = ?',
+      'DELETE FROM favoritos WHERE id_usuario = ? AND id_lenguaje = ?',
       [id_usuario, id_lenguaje]
     );
 
