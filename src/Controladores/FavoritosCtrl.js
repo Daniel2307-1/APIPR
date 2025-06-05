@@ -16,7 +16,7 @@ export const obetenerdatosporusuario = async (req, res) => {
       });
     }
 
-    res.json(result[0]);
+ res.json({ cant: result.length, data: result });
   } catch (error) {
     console.error("Error al obtener el favorito:", error);
     return res.status(500).json({ message: "Error en el servidor" });
