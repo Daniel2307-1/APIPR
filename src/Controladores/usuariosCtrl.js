@@ -94,3 +94,51 @@ export const postUsuarios = async (req, res) => {
     });
   }
 };
+export const putUsuarios = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      alias,
+      nombre,
+      apellido,
+      correo,
+      contrasena,
+      estado,
+      foto
+    } = req.body;
+
+    // Validar campos mínimos necesarios
+    if (!alias || !nombre || !apellido || !correo || estado === undefined) {
+      return res.status(400).json({ message: "Faltan campos obligatorios" });
+    }
+
+    const [result] = await sql.query(
+      `UPDATE usuarios 
+       SET alias = ?, nombre = ?, apellido = ?, correo = ?, contrasena = ?, estado = ?, foto = ?
+       WHERE id = ?`,
+      [alias, nombre, apellido, correo, contrasena, estado, foto, id]
+    );
+
+    if (result.affectedRows <= 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    const [updatedUser] = await sql.query('SELECT * FROM usuarios WHERE id = ?', [id]);
+    res.json({
+      message: "Usuario actualizado correctamente",
+      usuario: updatedUser[0]
+    });
+
+  } catch (error) {
+    console.error('Error al actualizar usuario:', error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
+
