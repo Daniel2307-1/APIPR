@@ -26,3 +26,33 @@ export const obetenerdatosporusuario = async (req, res) => {
     });
   }
 };
+export const postFavoritos = async (req, res) => {
+  try {
+    const { id_usuario, id_lenguaje } = req.body;
+
+    if (!id_usuario || !id_lenguaje) {
+      return res.status(400).json({ message: "Faltan campos obligatorios" });
+    }
+
+    const [result] = await sql.query(
+      `INSERT INTO Favoritos (id_usuario, id_lenguaje) VALUES (?, ?)`,
+      [id_usuario, id_lenguaje]
+    );
+
+    res.status(201).json({
+      id_favorito: result.insertId,
+      message: "Lenguaje añadido a favoritos"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
+
