@@ -11,7 +11,7 @@ export const obtenerfragmentosxid = async (req, res) => {
             cli_id: 0,
             message: "fragmento no encontrado"
         });
-        res.json(result[0]);
+        res.json({ cant: result.length, data: result });
     } catch {
         return res.status(500).json({ message: "Error en el servidor" });
     }
