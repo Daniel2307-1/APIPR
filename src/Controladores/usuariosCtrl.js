@@ -150,12 +150,13 @@ export const verificarCorreo = async (req, res) => {
 
   try {
     const [result] = await sql.query(
-      'SELECT id FROM usuarios WHERE correo = ? LIMIT 1',
+      'SELECT id, alias, nombre, apellido, correo FROM usuarios WHERE correo = ? LIMIT 1',
       [correo]
     );
 
     if (result.length > 0) {
-      return res.json({ existe: true });
+      // Retorna que existe y además los datos del usuario
+      return res.json({ existe: true, usuario: result[0] });
     } else {
       return res.json({ existe: false });
     }
@@ -172,5 +173,6 @@ export const verificarCorreo = async (req, res) => {
     });
   }
 };
+
 
 
