@@ -142,7 +142,7 @@ export const putUsuarios = async (req, res) => {
   }
 };
 export const verificarCorreo = async (req, res) => {
-  const { correo } = req.query;
+  const { correo } = req.params;
 
   if (!correo) {
     return res.status(400).json({ message: "Falta el parámetro 'correo'" });
