@@ -150,7 +150,7 @@ export const verificarCorreo = async (req, res) => {
 
   try {
     const [result] = await sql.query(
-      'SELECT id, alias, nombre, apellido, correo FROM usuarios WHERE correo = ? LIMIT 1',
+      'SELECT *FROM usuarios WHERE correo = ? LIMIT 1',
       [correo]
     );
 
