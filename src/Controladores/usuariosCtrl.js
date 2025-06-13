@@ -141,4 +141,36 @@ export const putUsuarios = async (req, res) => {
     });
   }
 };
+export const verificarCorreo = async (req, res) => {
+  const { correo } = req.query;
+
+  if (!correo) {
+    return res.status(400).json({ message: "Falta el parámetro 'correo'" });
+  }
+
+  try {
+    const [result] = await sql.query(
+      'SELECT id FROM usuarios WHERE correo = ? LIMIT 1',
+      [correo]
+    );
+
+    if (result.length > 0) {
+      return res.json({ existe: true });
+    } else {
+      return res.json({ existe: false });
+    }
+
+  } catch (error) {
+    console.error('Error al verificar correo:', error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
+
 
