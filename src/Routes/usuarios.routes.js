@@ -6,4 +6,6 @@ router.get('/usuarios',obetenerdatos)
 router.get('/usuariosA/:usuario/:clave', obetenerdatosA);
 router.post('/usuariosG/',postUsuarios)
 router.put('/usuarioA/:id',putUsuarios)
+router.get('/usuariosC/', verificarCorreo);
+
 export default router;
