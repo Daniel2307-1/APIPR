@@ -4,7 +4,7 @@ import { crearRecuperacion, verificarCodigo } from '../Controladores/recuperacio
 const router = express.Router();
 
 // Ruta para crear un código de recuperación
-router.post('/recuperacion/:id', crearRecuperacion);
+router.post('/recuperacion/:id_usuario', crearRecuperacion);
 
 // Ruta para verificar el código de recuperación
 router.post('/recuperacion/verificar', verificarCodigo);
