@@ -3,7 +3,7 @@ import crypto from 'crypto';
 
 export const crearRecuperacion = async (req, res) => {
   try {
-    const { id_usuario } = req.body;
+    const { id_usuario } = req.params;
 
     if (!id_usuario) {
       return res.status(400).json({ message: "Falta el ID del usuario" });
