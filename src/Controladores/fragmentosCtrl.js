@@ -49,4 +49,36 @@ export const putFragmento = async (req, res) => {
     });
   }
 };
+export const postFragmento = async (req, res) => {
+  try {
+    const { id_lenguaje, descripcion, codigo } = req.body;
+
+    // Validación de campos obligatorios
+    if (!id_lenguaje || !descripcion || !codigo) {
+      return res.status(400).json({ message: "Faltan campos obligatorios" });
+    }
+
+    // Inserción en la base de datos
+    const [result] = await sql.query(
+      `INSERT INTO fragmentos (id_lenguaje, descripcion, codigo)
+       VALUES (?, ?, ?)`,
+      [id_lenguaje, descripcion, codigo]
+    );
+
+    res.status(201).json({
+      id_fragmento: result.insertId,
+      message: "Fragmento insertado con éxito"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
 
