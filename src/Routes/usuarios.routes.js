@@ -1,5 +1,5 @@
 import express from 'express';
-import {obetenerdatos,obetenerdatosA,postUsuarios,putUsuarios} from '../Controladores/usuariosCtrl.js'
+import {obetenerdatos,obetenerdatosA,postUsuarios,putUsuarios,verificarCorreo} from '../Controladores/usuariosCtrl.js'
 
 const router = express.Router();
 router.get('/usuarios',obetenerdatos)
