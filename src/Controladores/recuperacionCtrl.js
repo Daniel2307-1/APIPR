@@ -10,10 +10,10 @@ export const crearRecuperacion = async (req, res) => {
     }
     const codigo = crypto.randomInt(100000, 999999).toString();
     const fecha_creacion = new Date();
-    await sql.query(
-      `INSERT INTO recuperacion (id_usuario, codigo_de_recuperacion, fecha_creacion) VALUES (?, ?, ?)`,
-      [id_usuario, codigo, fecha_creacion]
-    );
+   await sql.query(
+  `INSERT INTO recuperacion (id_usuario, codigo_de_recuperacion, fecha_envio) VALUES (?, ?, ?)`,
+  [id_usuario, codigo, fecha_creacion]
+);
     res.status(201).json({
       message: "Código de recuperación generado",
       codigo 
