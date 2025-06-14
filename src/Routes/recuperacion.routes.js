@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/recuperacion/:id_usuario', crearRecuperacion);
 router.post('/recuperacion/verificar', verificarCodigo);
-router.get('/recuperacion/:id_usuario/:codigo', almacenarcodigoRecuperacion);
+router.get('/recuperacionC/:id_usuario', almacenarcodigoRecuperacion);
 
 export default router;
