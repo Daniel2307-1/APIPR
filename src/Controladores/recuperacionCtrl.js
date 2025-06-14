@@ -25,14 +25,14 @@ export const crearRecuperacion = async (req, res) => {
 };
 export const verificarCodigo = async (req, res) => {
   try {
-    const { id_usuario, codigo } = req.body;
+    const { id_usuario, codigo } = req.params;
 
     if (!id_usuario || !codigo) {
       return res.status(400).json({ message: "Faltan campos obligatorios" });
     }
 
     const [result] = await sql.query(
-      `SELECT * FROM recuperacion WHERE id_usuario = ? AND codigo_de_recuperacion = ? ORDER BY fecha_creacion DESC LIMIT 1`,
+      `SELECT * FROM recuperacion WHERE id_usuario = ? AND codigo_de_recuperacion = ? ORDER BY fecha_envio DESC LIMIT 1`,
       [id_usuario, codigo]
     );
 
@@ -41,7 +41,7 @@ export const verificarCodigo = async (req, res) => {
     }
 
     const registro = result[0];
-    const fecha_creacion = new Date(registro.fecha_creacion);
+    const fecha_creacion = new Date(registro.fecha_envio);
     const ahora = new Date();
 
     const diferencia = (ahora - fecha_creacion) / 1000; // Diferencia en segundos
