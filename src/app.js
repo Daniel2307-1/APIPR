@@ -7,6 +7,9 @@ import LikesRoutes from './Routes/Like.routes.js'
 import fragmentosRoutes from './Routes/fragmentos.routes.js'
 import recuperacionRoutes from './Routes/recuperacion.routes.js'
 
+import mailRoutes from './Routes/mail.routes.js'
+
+
 const app = express()
 
 const corsOptions = {
@@ -24,6 +27,9 @@ app.use('/api', FavoritosRoutes)
 app.use('/api', LikesRoutes)
 app.use('/api', fragmentosRoutes)
 app.use('/api', recuperacionRoutes)
+
+app.use('/api', mailRoutes)
+
 
 app.use((req, res, next) => {
   res.status(404).json({
