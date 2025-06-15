@@ -173,6 +173,37 @@ export const verificarCorreo = async (req, res) => {
     });
   }
 };
+export const actualizarContrasena = async (req, res) => {
+  const { id, clave } = req.params;
+
+  if (!id || !clave) {
+    return res.status(400).json({ message: "Faltan parámetros: id o clave" });
+  }
+
+  try {
+    const [result] = await sql.query(
+      'UPDATE usuarios SET contrasena = ? WHERE id = ?',
+      [clave, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.json({ message: "Contraseña actualizada correctamente" });
+
+  } catch (error) {
+    console.error('Error al actualizar contraseña:', error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
 
 
 
