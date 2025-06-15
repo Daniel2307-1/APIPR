@@ -22,15 +22,15 @@ export const obtenerProcesoPorId = async (req, res) => {
 
 export const crearProceso = async (req, res) => {
   try {
-    const id_usuario = req.params.id_usuario;
+    const id= req.params.id;
 
-    if (!id_usuario) {
+    if (!id) {
       return res.status(400).json({ message: 'Falta el id_usuario' });
     }
 
     const [resultado] = await sql.query(
       'INSERT INTO proceso (id_usuario, puntaje, id_rango) VALUES (?, ?, ?)',
-      [id_usuario, 0, 1]
+      [id, 0, 1]
     );
 
     res.status(201).json({
