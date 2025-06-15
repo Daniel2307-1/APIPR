@@ -30,7 +30,7 @@ export const crearProceso = async (req, res) => {
 
     const [resultado] = await sql.query(
       'INSERT INTO proceso (id_usuario, puntaje, id_rango) VALUES (?, ?, ?)',
-      [id, 0, 1]
+      [id, 1, 1]
     );
 
     res.status(201).json({
