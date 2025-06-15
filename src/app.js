@@ -37,6 +37,7 @@ app.use('/api', retosRoutes)
 app.use('/api', rangoRoutes)
 app.use('/api', procesoRoutes)
 
+app.use('/api', mailRoutes)
 
 app.use((req, res, next) => {
   res.status(404).json({
