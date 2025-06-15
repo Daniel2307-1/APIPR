@@ -9,6 +9,7 @@ import recuperacionRoutes from './Routes/recuperacion.routes.js'
 import nivelesRoutes from './Routes/niveles.routes.js'
 import retosRoutes from './Routes/retos.routes.js'
 import rangoRoutes from './Routes/rango.routes.js'
+import procesoRoutes from './Routes/proceso.routes.js'
 
 import mailRoutes from './Routes/mail.routes.js'
 
@@ -34,6 +35,7 @@ app.use('/api', nivelesRoutes)
 app.use('/api', recuperacionRoutes)
 app.use('/api', retosRoutes)
 app.use('/api', rangoRoutes)
+app.use('/api', procesoRoutes)
 
 
 app.use((req, res, next) => {
