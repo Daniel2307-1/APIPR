@@ -6,7 +6,7 @@ export const enviarmensajedebasededatos = (req, res) => {
 export const obtenerProcesoPorId = async (req, res) => {
   try {
     const ID = req.params.id;
-    const [result] = await sql.query('SELECT * FROM proceso WHERE id_proceso = ?', [ID]);
+    const [result] = await sql.query('SELECT * FROM proceso WHERE id_usuario = ?', [ID]);
 
     if (result.length <= 0) {
       return res.status(400).json({
