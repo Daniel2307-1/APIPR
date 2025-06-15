@@ -6,6 +6,8 @@ import FavoritosRoutes from './Routes/Favoritos.routes.js'
 import LikesRoutes from './Routes/Like.routes.js'
 import fragmentosRoutes from './Routes/fragmentos.routes.js'
 import recuperacionRoutes from './Routes/recuperacion.routes.js'
+import nivelesRoutes from './Routes/niveles.routes.js'
+import retosRoutes from './Routes/retos.routes.js'
 
 import mailRoutes from './Routes/mail.routes.js'
 
@@ -27,8 +29,9 @@ app.use('/api', FavoritosRoutes)
 app.use('/api', LikesRoutes)
 app.use('/api', fragmentosRoutes)
 app.use('/api', recuperacionRoutes)
-
-app.use('/api', mailRoutes)
+app.use('/api', nivelesRoutes)
+app.use('/api', recuperacionRoutes)
+app.use('/api', retosRoutes)
 
 
 app.use((req, res, next) => {
