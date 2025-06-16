@@ -16,4 +16,7 @@ export const sql =  createPool({
   ssl: {
     rejectUnauthorized: false
   }
+  waitForConnections: true,           // Espera si no hay conexiones disponibles
+  connectionLimit: 10,                // Número máximo de conexiones simultáneas
+  queueLimit: 0  
 });
