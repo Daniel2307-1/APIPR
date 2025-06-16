@@ -17,6 +17,6 @@ export const sql =  createPool({
     rejectUnauthorized: false
   }
   waitForConnections: true,           // Espera si no hay conexiones disponibles
-  connectionLimit: 10,                // Número máximo de conexiones simultáneas
+  connectionLimit: 5,                // Número máximo de conexiones simultáneas
   queueLimit: 0  
 });
