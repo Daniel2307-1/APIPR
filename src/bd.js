@@ -15,7 +15,7 @@ export const sql =  createPool({
   port: BD_PORT,
   ssl: {
     rejectUnauthorized: false
-  }
+  },
   waitForConnections: true,           // Espera si no hay conexiones disponibles
   connectionLimit: 5,                // Número máximo de conexiones simultáneas
   queueLimit: 0  
