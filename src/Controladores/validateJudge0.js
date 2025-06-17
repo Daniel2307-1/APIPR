@@ -7,6 +7,10 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
     'SELECT input_prueba, output_esperado FROM casos_pruebas WHERE id_reto = ?',
     [id_reto]
   );
+  if (casos.length === 0) {
+  console.error(`No se encontraron casos de prueba para el reto ${id_reto}.`);
+  return []; // o lanza un error si así lo deseas
+}
   console.log('casos!', casos);
   const resultados = [];
 
