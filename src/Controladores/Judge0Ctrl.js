@@ -18,6 +18,7 @@ export async function validarCodigo(req, res) {
 
     res.json({ exito, resultados });
   } catch (error) {
+      console.error(error);
     res.status(500).json({ error: error.message });
   }
 }
