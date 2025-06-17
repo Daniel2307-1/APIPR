@@ -51,18 +51,18 @@ export const putFragmento = async (req, res) => {
 };
 export const postFragmento = async (req, res) => {
   try {
-    const { id_lenguaje, descripcion, codigo } = req.body;
+    const { id_lenguaje, descripcion, codigo, id_usuario } = req.body;
 
     // Validación de campos obligatorios
-    if (!id_lenguaje || !descripcion || !codigo) {
+    if (!id_lenguaje || !descripcion || !codigo || !id_usuario) {
       return res.status(400).json({ message: "Faltan campos obligatorios" });
     }
 
     // Inserción en la base de datos
     const [result] = await sql.query(
-      `INSERT INTO fragmentos (id_lenguaje, descripcion, codigo)
-       VALUES (?, ?, ?)`,
-      [id_lenguaje, descripcion, codigo]
+      `INSERT INTO fragmentos (id_lenguaje, descripcion, codigo, id_usuario)
+       VALUES (?, ?, ?, ?)`,
+      [id_lenguaje, descripcion, codigo, id_usuario]
     );
 
     res.status(201).json({
@@ -81,4 +81,5 @@ export const postFragmento = async (req, res) => {
     });
   }
 };
+
 
