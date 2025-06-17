@@ -7,21 +7,23 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
     'SELECT input_prueba, output_esperado FROM casos_pruebas WHERE id_reto = ?',
     [id_reto]
   );
-  if (casos.length === 0) {
-  console.error(`No se encontraron casos de prueba para el reto ${id_reto}.`);
-  return []; // o lanza un error si así lo deseas
-}
-  console.log('casos!', casos);
+  console.log('Casos originales:', casos);
+
   const resultados = [];
 
   for (const caso of casos) {
+    // Limpiar dobles escapes "\n" => salto de línea real
+    const inputLimpio = caso.input_prueba.replace(/\\n/g, '\n');
+    const outputLimpio = caso.output_esperado.replace(/\\n/g, '\n');
+    console.log('Input limpio:', JSON.stringify(inputLimpio));
+    console.log('Output limpio:', JSON.stringify(outputLimpio));
+
     const body = {
       source_code: codigo,
-    stdin: caso.input_prueba.replace(/\\n/g, '\n'), // <- aquí
+      stdin: inputLimpio,
       language_id: obtenerIdLenguaje(lenguaje),
-    expected_output: caso.output_esperado.trim(), // opcional
-      // para no codificar base64
-      base64_encoded: false
+      expected_output: outputLimpio,
+      base64_encoded: false,
     };
 
     try {
@@ -32,27 +34,28 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
           headers: {
             'X-RapidAPI-Key': '2bcd298037mshbeda24207a6015bp1d54b1jsnddc92a616711',
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         }
       );
+
+      console.log('Respuesta Judge0:', res.data);
+
       resultados.push({
-        input: caso.input_prueba,
-        output_esperado: caso.output_esperado,
+        input: inputLimpio,
+        output_esperado: outputLimpio,
         salida_usuario: res.data.stdout?.trim(),
-        correcto: res.data.status.description === 'Accepted'
+        correcto: res.data.status.description === 'Accepted',
       });
 
     } catch (error) {
-       console.error(error);
-  console.error(error.response?.data);
-  
-  resultados.push({ 
-    input: caso.input_prueba,
-    output_esperado: caso.output_esperado,
-    salida_usuario: null,
-    correcto: false,
-    error: error.message
+      console.error('Error Judge0:', error.response?.data || error.message);
+      resultados.push({
+        input: inputLimpio,
+        output_esperado: outputLimpio,
+        salida_usuario: null,
+        correcto: false,
+        error: error.message,
       });
     }
   }
