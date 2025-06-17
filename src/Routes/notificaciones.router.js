@@ -1,6 +1,6 @@
 import express from 'express';
 import {obtenerNotificacionesPorUsuario,crearNotificacion,marcarNotificacionLeida,eliminarNotificacion
-} from '../controllers/notificacionesCtrl.js';
+} from '../Controladores/notificacionesCtrl.js';
 const router = express.Router();
 router.get('/notificaciones/usuario/:id', obtenerNotificacionesPorUsuario);
 router.post('/notificaciones', crearNotificacion);
