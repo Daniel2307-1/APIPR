@@ -4,6 +4,8 @@ import { validarCodigoConJudge0 } from '../Controladores/validateJudge0.js';
 // Asegúrate de que el nombre del fichero que exporta `validarCodigoConJudge0` esté bien
 
 export async function validarCodigo(req, res) {
+    console.log('Validar código - req.body:', req.body);
+
   const { codigo, lenguaje, id_reto } = req.body;
 
   if (!codigo || !lenguaje || !id_reto) {
