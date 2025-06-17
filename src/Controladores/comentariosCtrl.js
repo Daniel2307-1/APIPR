@@ -5,10 +5,10 @@ export const enviarmensajedebasededatos = (req, res) => {
 };
 export const insertarComentario = async (req, res) => {
   try {
-    const { id_usuario, id_fragmento, id_lenguaje, comentario } = req.params;
+    const { id_usuario, id_fragmento, id_lenguaje, comentario } = req.body;
 
     if (!id_usuario || !id_fragmento || !id_lenguaje || !comentario) {
-      return res.status(400).json({ message: "Faltan parámetros obligatorios" });
+      return res.status(400).json({ message: "Faltan campos obligatorios" });
     }
 
     const [result] = await sql.query(
