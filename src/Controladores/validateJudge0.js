@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { obtenerIdLenguaje } from './obtenerIdLenguaje.js';
 
 export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
   // Obtener casos de prueba
