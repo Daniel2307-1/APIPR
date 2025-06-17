@@ -25,7 +25,7 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
         body,
         {
           headers: {
-            'X-RapidAPI-Key': 'TU_API_KEY_DE_RAPIDAPI',
+            'X-RapidAPI-Key': '2bcd298037mshbeda24207a6015bp1d54b1jsnddc92a616711',
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
             'Content-Type': 'application/json'
           }
