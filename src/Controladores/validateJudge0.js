@@ -3,7 +3,7 @@ import axios from 'axios';
 export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
   // Obtener casos de prueba
   const [casos] = await sql.query(
-    'SELECT input_prueba, output_esperado FROM casos_prueba WHERE id_reto = ?',
+    'SELECT input_prueba, output_esperado FROM casos_pruebas WHERE id_reto = ?',
     [id_reto]
   );
 
