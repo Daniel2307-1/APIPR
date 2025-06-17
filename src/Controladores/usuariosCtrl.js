@@ -204,6 +204,37 @@ export const actualizarContrasena = async (req, res) => {
     });
   }
 };
+export const obtenerUsuarioPorId = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: "Falta el parámetro 'id'" });
+  }
+
+  try {
+    const [result] = await sql.query(
+      'SELECT * FROM usuarios WHERE id = ? LIMIT 1',
+      [id]
+    );
+
+    if (result.length > 0) {
+      return res.json({ existe: true, usuario: result[0] });
+    } else {
+      return res.status(404).json({ existe: false, message: "Usuario no encontrado" });
+    }
+
+  } catch (error) {
+    console.error('Error al obtener usuario por ID:', error);
+    return res.status(500).json({
+      message: "Error en el servidor",
+      error: {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      }
+    });
+  }
+};
 
 
 
