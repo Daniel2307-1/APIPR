@@ -68,7 +68,7 @@ export const obtenerInteraccionesPorUsuario = async (req, res) => {
     const id_usuario = req.params.id;
 
     const [result] = await sql.query(
-      `SELECT * FROM interaccion WHERE id_fragmentos = ?`,
+      `SELECT * FROM interaccion WHERE id_fragmento = ?`,
       [id_usuario]
     );
 
