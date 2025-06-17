@@ -1,6 +1,6 @@
 // src/controllers/Judge0Ctrl.js
 import { db as sql } from '../db.js';
-import { validarCodigoConJudge0 } from '../controllers/validateJudge0.js';
+import { validarCodigoConJudge0 } from '../Controladores/validateJudge0.js';
 // Asegúrate de que el nombre del fichero que exporta `validarCodigoConJudge0` esté bien
 
 export async function validarCodigo(req, res) {
