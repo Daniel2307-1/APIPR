@@ -31,13 +31,6 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
           }
         }
       );
-      
-  resultados.push({
-    input: caso.input_prueba,
-    output_esperado: caso.output_esperado,
-    salida_usuario: res.data.stdout?.trim(),
-    correcto: res.data.status.description === 'Accepted'
-  });
       resultados.push({
         input: caso.input_prueba,
         output_esperado: caso.output_esperado,
@@ -46,6 +39,7 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
       });
 
     } catch (error) {
+      console.error(error.response?.data);  // Aquí muestras el detalle del error que viene del API
       resultados.push({
         input: caso.input_prueba,
         output_esperado: caso.output_esperado,
