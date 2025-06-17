@@ -11,6 +11,7 @@ import retosRoutes from './Routes/retos.routes.js'
 import rangoRoutes from './Routes/rango.routes.js'
 import procesoRoutes from './Routes/proceso.routes.js'
 import comentariosRoutes from './Routes/comentarios.routes.js'
+import interaccionRoutes from './Routes/interaccion.routes.js'
 
 import mailRoutes from './Routes/mail.routes.js'
 
@@ -39,6 +40,7 @@ app.use('/api', rangoRoutes)
 app.use('/api', procesoRoutes)
 app.use('/api', comentariosRoutes)
 app.use('/api', mailRoutes)
+app.use('/api', interaccionRoutes)
 
 app.use((req, res, next) => {
   res.status(404).json({
