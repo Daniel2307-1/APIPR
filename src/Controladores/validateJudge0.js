@@ -17,9 +17,9 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
   for (const caso of casos) {
     const body = {
       source_code: codigo,
-      stdin: caso.input_prueba,
+    stdin: caso.input_prueba.replace(/\\n/g, '\n'), // <- aquí
       language_id: obtenerIdLenguaje(lenguaje),
-      expected_output: caso.output_esperado,
+    expected_output: caso.output_esperado.trim(), // opcional
       // para no codificar base64
       base64_encoded: false
     };
