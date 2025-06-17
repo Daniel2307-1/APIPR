@@ -6,7 +6,7 @@ export async function validarCodigoConJudge0(codigo, lenguaje, id_reto, sql) {
     'SELECT input_prueba, output_esperado FROM casos_pruebas WHERE id_reto = ?',
     [id_reto]
   );
-
+  console.log('casos!', casos);
   const resultados = [];
 
   for (const caso of casos) {
