@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { validarCodigo } from '../controllers/Judge0Ctrl.js';
+import { validarCodigo } from '../Controladores/Judge0Ctrl.js';
 
 router.post('/validar-codigo', validarCodigo);
 
