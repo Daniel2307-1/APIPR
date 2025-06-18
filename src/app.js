@@ -16,6 +16,7 @@ import notificacionesRoutes from './Routes/notificaciones.routes.js'
 import judge0Router from './Routes/Judge0.routes.js';
 import mailRoutes from './Routes/mail.routes.js'
 import retoRoutes from './Routes/retovalidacion.routes.js';
+import respuestaRoutes from './Routes/respuesta.routes.js';
 
 
 const app = express()
@@ -45,6 +46,7 @@ app.use('/api', mailRoutes)
 app.use('/api', interaccionRoutes)
 app.use('/api', notificacionesRoutes)
 app.use('/api', retoRoutes);
+app.use('/api', respuestaRoutes);
 
 
 app.use((req, res, next) => {
