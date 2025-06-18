@@ -7,7 +7,7 @@ export const obetenerrespuestaporusuario = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const [result] = await sql.query('SELECT *FROM respuesta WHERE id_usuario = ? AND tipo=oficial', [id]);
+    const [result] = await sql.query('SELECT *FROM respuesta WHERE id_usuario = ? AND tipo='oficial'', [id]);
 
     if (result.length <= 0) {
       return res.status(404).json({
@@ -26,7 +26,7 @@ export const obetenerrespuestaporusuario2 = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const [result] = await sql.query('SELECT *FROM respuesta WHERE id_usuario = ? AND tipo=usuario', [id]);
+    const [result] = await sql.query('SELECT *FROM respuesta WHERE id_usuario = ? AND tipo='usuario'', [id]);
 
     if (result.length <= 0) {
       return res.status(404).json({
