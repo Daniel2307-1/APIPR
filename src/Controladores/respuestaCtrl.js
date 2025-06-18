@@ -24,15 +24,16 @@ export const obetenerrespuestaporusuario = async (req, res) => {
 };
 export const crearRespuesta = async (req, res) => {
   try {
-    const { id_usuario, id_reto, codigo_subido } = req.params;
+    const { id_usuario, id_reto, codigo_subido, tipo } = req.params;
 
-    if (!id_usuario || !id_reto || !codigo_subido) {
-      return res.status(400).json({ message: "Faltan parámetros en la URL" });
+    // Validar parámetros
+    if (!id_usuario || !id_reto || !codigo_subido || !tipo) {
+      return res.status(400).json({ message: "Faltan parámetros obligatorios" });
     }
 
     const [result] = await sql.query(
-      'INSERT INTO respuesta (id_usuario, id_reto, codigo_subido, resultado, fecha_respuesta) VALUES (?, ?, ?, "C", NOW())',
-      [id_usuario, id_reto, codigo_subido]
+      'INSERT INTO respuesta (id_usuario, id_reto, codigo_subido, resultado, fecha_respuesta, tipo) VALUES (?, ?, ?, "C", NOW(), ?)',
+      [id_usuario, id_reto, decodeURIComponent(codigo_subido), tipo]
     );
 
     res.status(201).json({
@@ -44,3 +45,4 @@ export const crearRespuesta = async (req, res) => {
     res.status(500).json({ message: "Error en el servidor" });
   }
 };
+
