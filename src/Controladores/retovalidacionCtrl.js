@@ -14,8 +14,12 @@ export async function validarCodigo(req, res) {
 
     const { codigo, titulo, descripcion, lenguaje } = req.body;
 
-    const prompt = `Este es el reto: ${titulo}\nDescripción: ${descripcion}\nVerifica si este código cumple con el reto:\n${codigo}\nSolo responde "Correcto" o "Incorrecto".`;
-      console.log('PROMPT ENVIADO A OPENAI:\n', prompt);
+    const prompt = `Este es el reto: ${titulo}
+Descripción: ${descripcion}
+Lenguaje requerido: ${lenguaje}
+Verifica si el siguiente código está escrito en el lenguaje especificado y cumple con el reto:
+${codigo}
+Solo responde "Correcto" si cumple completamente con el reto y está escrito en el lenguaje correcto. En caso contrario, responde "Incorrecto".`;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
