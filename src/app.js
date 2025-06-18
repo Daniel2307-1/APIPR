@@ -17,7 +17,7 @@ import judge0Router from './Routes/Judge0.routes.js';
 import mailRoutes from './Routes/mail.routes.js'
 import retoRoutes from './Routes/retovalidacion.routes.js';
 import respuestaRoutes from './Routes/respuesta.routes.js';
-
+import retosURoutes from './Routes/retosU.routes.js';
 
 const app = express()
 
@@ -47,6 +47,7 @@ app.use('/api', interaccionRoutes)
 app.use('/api', notificacionesRoutes)
 app.use('/api', retoRoutes);
 app.use('/api', respuestaRoutes);
+app.use('/api', retosURoutes);
 
 
 app.use((req, res, next) => {
