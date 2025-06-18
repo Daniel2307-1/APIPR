@@ -19,3 +19,20 @@ export const obtenerNivelPorId = async (req, res) => {
     return res.status(500).json({ message: "Error en el servidor" });
   }
 };
+export const obtenerNiveles = async (req, res) => {
+  try {
+    const [result] = await sql.query('SELECT * FROM nivel');
+
+    if (result.length <= 0) {
+      return res.status(400).json({
+        cli_id: 0,
+        message: "No se encontraron niveles"
+      });
+    }
+
+    res.json({ cant: result.length, data: result });
+  } catch {
+    return res.status(500).json({ message: "Error en el servidor" });
+  }
+};
+
