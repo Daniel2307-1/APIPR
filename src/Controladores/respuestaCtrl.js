@@ -24,7 +24,8 @@ export const obetenerrespuestaporusuario = async (req, res) => {
 };
 export const crearRespuesta = async (req, res) => {
   try {
-    const { id_usuario, id_reto, codigo_subido, tipo } = req.params;
+    const { id_usuario, id_reto } = req.params;
+    const { codigo_subido, tipo } = req.body;
 
     // Validar parámetros
     if (!id_usuario || !id_reto || !codigo_subido || !tipo) {
@@ -33,7 +34,7 @@ export const crearRespuesta = async (req, res) => {
 
     const [result] = await sql.query(
       'INSERT INTO respuesta (id_usuario, id_reto, codigo_subido, resultado, fecha_respuesta, tipo) VALUES (?, ?, ?, "C", NOW(), ?)',
-      [id_usuario, id_reto, decodeURIComponent(codigo_subido), tipo]
+      [id_usuario, id_reto, codigo_subido, tipo]
     );
 
     res.status(201).json({
@@ -45,4 +46,5 @@ export const crearRespuesta = async (req, res) => {
     res.status(500).json({ message: "Error en el servidor" });
   }
 };
+
 
