@@ -6,7 +6,7 @@ import {
     crearRetoUsuario,
     actualizarRetoUsuario,
     eliminarRetoUsuario
-} from '../Controladores/retosUCrtl.js';
+} from '../Controladores/retosUCtrl.js';
 
 const router = express.Router();
 
