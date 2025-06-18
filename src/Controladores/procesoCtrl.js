@@ -42,3 +42,53 @@ export const crearProceso = async (req, res) => {
     res.status(500).json({ message: 'Error al crear el proceso' });
   }
 };
+export const actualizarProceso = async (req, res) => {
+  try {
+    const id_usuario = req.params.id;
+    const { puntosGanados } = req.body;
+
+    if (!id_usuario || puntosGanados == null) {
+      return res.status(400).json({ message: 'Faltan parámetros requeridos' });
+    }
+
+    // Obtener proceso actual
+    const [procesoResult] = await sql.query(
+      'SELECT * FROM proceso WHERE id_usuario = ?',
+      [id_usuario]
+    );
+
+    if (procesoResult.length === 0) {
+      return res.status(404).json({ message: 'Proceso no encontrado' });
+    }
+
+    const proceso = procesoResult[0];
+    const nuevoPuntaje = proceso.puntaje + puntosGanados;
+
+    // Obtener el nuevo rango según el nuevo puntaje
+    const [rangoResult] = await sql.query(
+      'SELECT id_rango FROM rango WHERE ? BETWEEN puntaje_min AND puntaje_max LIMIT 1',
+      [nuevoPuntaje]
+    );
+
+    if (rangoResult.length === 0) {
+      return res.status(400).json({ message: 'No se encontró un rango para ese puntaje' });
+    }
+
+    const nuevoRango = rangoResult[0].id_rango;
+
+    // Actualizar proceso con nuevo puntaje y rango
+    await sql.query(
+      'UPDATE proceso SET puntaje = ?, id_rango = ? WHERE id_usuario = ?',
+      [nuevoPuntaje, nuevoRango, id_usuario]
+    );
+
+    res.json({
+      message: 'Proceso actualizado correctamente',
+      puntaje: nuevoPuntaje,
+      id_rango: nuevoRango
+    });
+  } catch (error) {
+    console.error('Error al actualizar proceso:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+};
