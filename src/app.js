@@ -44,7 +44,6 @@ app.use('/api', comentariosRoutes)
 app.use('/api', mailRoutes)
 app.use('/api', interaccionRoutes)
 app.use('/api', notificacionesRoutes)
-app.use('/api', judge0Router);
 app.use('/api', retoRoutes);
 
 
